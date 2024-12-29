@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proxy Server Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header { background: #333; color: #fff; padding: 1em; text-align: center; }
+    section { padding: 1em; }
+    .logs { margin: 0; padding: 0; list-style: none; background: #f4f4f4; border: 1px solid #ddd; max-height: 400px; overflow-y: auto; }
+    .logs li { padding: 0.5em; border-bottom: 1px solid #ddd; }
+    .stats { margin-bottom: 1em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Proxy Server Dashboard</h1>
+  </header>
+  <section>
+    <div class="stats">
+      <p><strong>Requests Processed:</strong> <span id="requestCount">0</span></p>
+    </div>
+    <h2>Logs</h2>
+    <ul class="logs" id="logs"></ul>
+  </section>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const requestCount = document.getElementById('requestCount');
+    const logs = document.getElementById('logs');
+
+    socket.on('update', (data) => {
+      requestCount.textContent = data.requestCount;
+      logs.innerHTML = data.logs.slice(-20).map(log => `<li>${log}</li>`).join('');
+    });
+  </script>
+</body>
+</html>
