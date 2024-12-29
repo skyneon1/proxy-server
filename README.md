@@ -23,7 +23,7 @@ A simple and lightweight Node.js-based proxy server for forwarding HTTP requests
    node proxy.js
 4. Open Cmd or url and use proxy;
    ```bash
-   curl http://localhost:3000/endpoin_here(like google.com)
+   curl http://localhost:2560/endpoin_here(like google.com)
 
 
 ---
